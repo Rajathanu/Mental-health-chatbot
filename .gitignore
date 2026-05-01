@@ -1,0 +1,17 @@
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+results/
+checkpoint-*/
+*.pt
+*.pth
+*.bin
+*.safetensors
+
+*.zip
+*.xlsx
+*.png
+*.jpg
+*.jpeg
