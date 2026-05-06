@@ -237,8 +237,6 @@ Both the model and tokenizer are saved to the `emotion_model/` directory. Always
 
 > ⚠️ **Note:** `train.py` was originally developed in Google Colab (you can see the Colab header in the file's docstring). If you're running it locally, make sure the `dataset.csv` path and `emotion_model/` output directory are correct relative to where you run the script.
 
-> 📸 **[Attach screenshot: Training output showing per-epoch loss and accuracy — Member responsible: ___________]**
-
 ---
 
 ### `predict.py`
@@ -290,8 +288,6 @@ if __name__ == "__main__":
 
 Useful for quickly testing the model in isolation without starting the full chatbot.
 
-> 📸 **[Attach screenshot: predict.py running in terminal with sample inputs and detected emotion labels — Member responsible: ___________]**
-
 ---
 
 ### `gpt_handler.py`
@@ -330,8 +326,6 @@ The model is `llama-3.3-70b-versatile` — Meta's Llama 3.3 70B parameter model,
 `temperature=0.7` sits in a useful middle ground: lower than the default (which would feel more predictable), but not so low that the bot becomes robotic. For mental health conversations, you want the model to vary its language naturally while staying coherent. `max_tokens=500` caps the response length — which keeps replies focused and prevents the model from writing essays.
 
 > ⚠️ **Important:** The API key is hardcoded in this file as a string. In any real deployment, replace this with `os.environ.get("GROQ_API_KEY")`. Committing API keys to version control is a security risk.
-
-> 📸 **[Attach screenshot: test_gpt.py output showing a successful API response from Groq — Member responsible: ___________]**
 
 ---
 
@@ -418,10 +412,6 @@ This is a deliberate prompt-engineering technique. Rather than hoping the LLM wi
 
 The `chat_history` list accumulates turns and is injected into every subsequent prompt, giving the LLM context about what was said earlier. This is a basic form of in-context memory — the model isn't stateful on its own; the history is passed along manually. The window is capped at the last 10 messages to prevent the prompt from growing indefinitely (which would eventually exceed the model's context window and add latency).
 
-> 📸 **[Attach screenshot: Full CLI conversation showing user messages and bot responses across multiple turns, demonstrating different emotional states — Member responsible: ___________]**
-
-> 📸 **[Attach screenshot: CLI output specifically when a message with suicidal content is entered, showing the safety notice — Member responsible: ___________]**
-
 ---
 
 ### `ui_app.py`
@@ -471,8 +461,6 @@ if user_text:
 
 Notably, the Streamlit UI has a slightly simplified prompt compared to `main.py` (no per-emotion instruction routing). Bringing the full `emotion_instructions` dictionary into `ui_app.py` would be a straightforward improvement that makes both interfaces behaviorally consistent.
 
-> 📸 **[Attach screenshot: Browser showing the Streamlit chat interface with a conversation in progress — Member responsible: ___________]**
-
 ---
 
 ### `ui_utils.py`
@@ -498,7 +486,6 @@ This is intended to visually indicate the detected emotion in the UI (e.g., disp
 
 A focused test script for validating the GPT handler in isolation. Useful for checking API connectivity and response formatting without running the full chatbot loop. If you're setting up the project and need to verify your Groq API key works before training the model, run this first.
 
-> 📸 **[Attach screenshot: test_gpt.py output in terminal — Member responsible: ___________]**
 
 ---
 
@@ -623,55 +610,6 @@ Emotion: joy
 
 ---
 
-## Testing & Execution Screenshots
-
-### Training Execution (`train.py`)
-
-> 📸 **[Attach screenshot: Terminal output showing 3 epochs of training with loss and eval_accuracy — Member responsible: ___________]**
-
-*Expected: Three epochs of training with decreasing loss and increasing eval_accuracy. Final line: "MODEL TRAINED SUCCESSFULLY".*
-
----
-
-### Emotion Prediction Test (`predict.py`)
-
-> 📸 **[Attach screenshot: predict.py running interactively with varied test sentences and correct emotion labels — Member responsible: ___________]**
-
-*Expected: Correct emotion predictions for inputs across all 6 emotion categories.*
-
----
-
-### GPT Handler Test (`test_gpt.py`)
-
-> 📸 **[Attach screenshot: test_gpt.py showing a well-formed API response from Groq/LLaMA — Member responsible: ___________]**
-
-*Expected: A coherent, empathetic response paragraph printed to terminal.*
-
----
-
-### CLI Chatbot (`main.py`)
-
-> 📸 **[Attach screenshot: Multi-turn CLI conversation demonstrating the chatbot handling at least two different emotional states — Member responsible: ___________]**
-
-*Expected: User messages, bot responses, visible tone differences between e.g. anger vs. depression handling.*
-
----
-
-### Suicide Safety Response (`main.py`)
-
-> 📸 **[Attach screenshot: CLI output when a message with crisis/suicidal content is entered — Member responsible: ___________]**
-
-*Expected: Immediate safety notice printed before the LLM response, followed by a carefully worded supportive reply.*
-
----
-
-### Streamlit Web UI (`ui_app.py`)
-
-> 📸 **[Attach screenshot: Browser view of the Streamlit chat interface with a full conversation visible — Member responsible: ___________]**
-
-*Expected: 🧠 "Mental Health Support Chatbot" header, clean chat bubble layout, user and assistant turns.*
-
----
 
 ## Design Decisions & Known Limitations
 
